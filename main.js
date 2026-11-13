@@ -3,10 +3,10 @@
 
   /* ───── Контакты: меняются только здесь (ник без @ и без ссылки) ───── */
   const CONTACTS = {
-    telegram: '',
-    instagram: '',
-    email: '',
-    github: '',
+    telegram: '@m1shutkaaa',
+    instagram: '@admy_tg',
+    email: 'mihailkzmn@gmail.com',
+    github: 'AdmyTopG-dev',
   };
 
   const $ = (s, r = document) => r.querySelector(s);
