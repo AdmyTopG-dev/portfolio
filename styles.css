@@ -11,8 +11,8 @@
   --text: #e9f6ee;
   --muted: #93a89c;
   --dim: #6f867a;
-  --fd: 'Unbounded', system-ui, sans-serif;
-  --fb: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fd: 'Instrument Sans', system-ui, sans-serif;
+  --fb: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --fm: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --ease: cubic-bezier(.16, 1, .3, 1);
   --pad: clamp(16px, 4vw, 40px);
@@ -68,7 +68,7 @@ em { font-style: normal; color: var(--neon); text-shadow: 0 0 30px rgba(var(--rg
 .skip { position: fixed; left: 16px; top: -80px; z-index: 200; padding: .7rem 1rem; border-radius: 10px; background: var(--neon); color: #02110a; font-weight: 600; text-decoration: none; transition: top .2s; }
 .skip:focus { top: 12px; }
 
-.eyebrow { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.4rem; font: 600 1.05rem/1.2 'Instrument Sans', var(--fb); color: var(--neon); }
+.eyebrow { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.4rem; font: 600 1.05rem/1.2 var(--fb); color: var(--neon); }
 .eyebrow::after { content: ""; flex: 0 0 56px; height: 1px; background: linear-gradient(90deg, var(--line2), transparent); }
 
 /* ───── Кнопки ───── */
