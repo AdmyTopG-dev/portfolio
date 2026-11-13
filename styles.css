@@ -68,7 +68,7 @@ em { font-style: normal; color: var(--neon); text-shadow: 0 0 30px rgba(var(--rg
 .skip { position: fixed; left: 16px; top: -80px; z-index: 200; padding: .7rem 1rem; border-radius: 10px; background: var(--neon); color: #02110a; font-weight: 600; text-decoration: none; transition: top .2s; }
 .skip:focus { top: 12px; }
 
-.eyebrow { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.4rem; font: 500 .78rem/1 var(--fm); letter-spacing: .16em; text-transform: uppercase; color: var(--neon); }
+.eyebrow { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.4rem; font: 600 1rem/1.2 var(--fb); color: var(--neon); }
 .eyebrow::after { content: ""; flex: 0 0 56px; height: 1px; background: linear-gradient(90deg, var(--line2), transparent); }
 
 /* ───── Кнопки ───── */
