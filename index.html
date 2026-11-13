@@ -9,7 +9,7 @@
   <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mykhailo Kuzmin — автоматизация для бизнеса">
-  <meta property="og:description" content="n8n + Claude API: разбор документов, переписка, учёт — в системе из рабочих workflow.">
+  <meta property="og:description" content="n8n + Claude API: разбор документов, переписка и учёт в системе из рабочих workflow.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23020504'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' fill='none' stroke='%233dff8b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,7 @@
       <div class="hero-copy">
         <p class="chip rv"><i aria-hidden="true"></i><span data-i18n="hero.status">Открыт к проектам · Польша, удалённо</span></p>
         <h1 class="h1" data-i18n="hero.title">Автоматизация, которая <em>реально работает</em></h1>
-        <p class="hero-sub rv" style="--i:3" data-i18n="hero.sub">Я Михаил. Строю для бизнеса системы на n8n + Claude API, которые забирают ручную рутину — разбор документов, переписку, учёт. Не демо для видео, а workflow, которые каждый день делают реальную работу.</p>
+        <p class="hero-sub rv" style="--i:3" data-i18n="hero.sub">Я Михаил. Строю для бизнеса системы на n8n + Claude API, которые забирают ручную рутину: разбор документов, переписку, учёт. Это workflow, которые уже работают в бизнесе.</p>
         <div class="hero-cta rv" style="--i:4">
           <a class="btn magnetic" href="#contact" data-contact="telegram"><span data-i18n="hero.cta1">Обсудить задачу</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost magnetic" href="#case"><span data-i18n="hero.cta2">Как это устроено</span><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg></a>
@@ -101,7 +101,7 @@
             <li><span class="run-ic"><svg class="ic"><use href="#i-mailcheck"/></svg></span><span class="run-tx"><b>Gmail</b><small>approve / reject</small></span><i class="run-st"></i></li>
             <li><span class="run-ic"><svg class="ic"><use href="#i-bot"/></svg></span><span class="run-tx"><b>Telegram</b><small>bot online</small></span><i class="run-st"></i></li>
           </ol>
-          <div class="run-foot"><span>$ n8n execute --id daily-run</span><i class="caret"></i></div>
+          <div class="run-foot"><span>$ n8n execute --id daily-run</span></div>
         </div>
       </div>
     </div>
@@ -118,17 +118,17 @@
   <!-- ───── Обо мне ───── -->
   <section class="sec" id="about">
     <div class="wrap">
-      <p class="eyebrow rv"><b>01</b><span data-i18n="about.eyebrow">Обо мне</span></p>
+      <p class="eyebrow rv"><span data-i18n="about.eyebrow">Обо мне</span></p>
       <h2 class="h2 rv" style="--i:1" data-i18n="about.title">Технологии должны снимать рутину <em>с реальных людей</em></h2>
       <div class="about-grid">
         <div class="about-text rv">
-          <p data-i18n="about.p1">Мне интересны автоматизация и агентные системы — не абстрактно, а на конкретном бизнесе, который видишь каждый день. На связке n8n + Claude API я превратил ручную работу — разбор документов клиентов, переписку, ведение учёта — в систему из рабочих workflow.</p>
-          <p data-i18n="about.p2">Сейчас двигаюсь дальше — строю личную агентную систему на Claude Code: отдельные агенты под разные задачи и постоянная память между сессиями.</p>
+          <p data-i18n="about.p1">Мне интересны автоматизация и агентные системы на конкретном бизнесе, который видишь каждый день. На связке n8n + Claude API я превратил ручную работу в систему из рабочих workflow: разбор документов клиентов, переписка, ведение учёта.</p>
+          <p data-i18n="about.p2">Сейчас двигаюсь дальше и строю личную агентную систему на Claude Code: отдельные агенты под разные задачи и постоянная память между сессиями.</p>
         </div>
         <ul class="values">
-          <li class="rv" style="--i:1"><span class="v-n" aria-hidden="true">/01</span><div><h3 data-i18n="about.v1.t">Работает, а не демо</h3><p data-i18n="about.v1.d">Система живёт в ежедневной работе бизнеса, а не в минутном ролике.</p></div></li>
-          <li class="rv" style="--i:2"><span class="v-n" aria-hidden="true">/02</span><div><h3 data-i18n="about.v2.t">Решение за человеком</h3><p data-i18n="about.v2.d">Важные шаги проходят через approve / reject: ИИ готовит, человек подтверждает.</p></div></li>
-          <li class="rv" style="--i:3"><span class="v-n" aria-hidden="true">/03</span><div><h3 data-i18n="about.v3.t">На конкретном бизнесе</h3><p data-i18n="about.v3.d">Автоматизирую не абстрактные «процессы», а работу, которую люди делают каждый день.</p></div></li>
+          <li class="rv" style="--i:1"><h3 data-i18n="about.v1.t">Работает каждый день</h3><p data-i18n="about.v1.d">Система должна приносить пользу в работе бизнеса. Демо для видео меня не интересуют.</p></li>
+          <li class="rv" style="--i:2"><h3 data-i18n="about.v2.t">Решение за человеком</h3><p data-i18n="about.v2.d">Важные шаги проходят через approve / reject: ИИ готовит, человек подтверждает.</p></li>
+          <li class="rv" style="--i:3"><h3 data-i18n="about.v3.t">Сначала задача</h3><p data-i18n="about.v3.d">Беру работу, которую люди делают руками, и перекладываю её на систему.</p></li>
         </ul>
       </div>
     </div>
@@ -137,32 +137,32 @@
   <!-- ───── Услуги ───── -->
   <section class="sec" id="services">
     <div class="wrap">
-      <p class="eyebrow rv"><b>02</b><span data-i18n="services.eyebrow">Что я делаю</span></p>
+      <p class="eyebrow rv"><span data-i18n="services.eyebrow">Что я делаю</span></p>
       <h2 class="h2 rv" style="--i:1" data-i18n="services.title">Что можно снять <em>с вашей команды</em></h2>
       <ul class="cards">
         <li class="card spot rv">
-          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><span class="card-n" aria-hidden="true">01</span></div>
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span>
           <h3 data-i18n="s1.t">Разбор документов</h3>
-          <p data-i18n="s1.d">PDF и сканы читает Claude Vision: достаёт данные и раскладывает их по местам — без ручного перепечатывания.</p>
-          <ul class="tags"><li>Claude Vision</li><li>PDF</li></ul>
+          <p data-i18n="s1.d">Система читает PDF и сканы, достаёт из них данные и раскладывает по местам. Перепечатывать вручную не нужно.</p>
+          <ul class="tags"><li>Claude Vision</li></ul>
         </li>
         <li class="card spot rv" style="--i:1">
-          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-mailcheck"/></svg></span><span class="card-n" aria-hidden="true">02</span></div>
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-mailcheck"/></svg></span>
           <h3 data-i18n="s2.t">Переписка под контролем</h3>
-          <p data-i18n="s2.d">Автоматические письма с подтверждением изменений. Перед важным шагом — approve или reject от человека.</p>
-          <ul class="tags"><li>Gmail</li><li>approve / reject</li></ul>
+          <p data-i18n="s2.d">Письма с подтверждением изменений уходят автоматически. Перед важным шагом система ждёт approve или reject от человека.</p>
+          <ul class="tags"><li>Gmail</li></ul>
         </li>
         <li class="card spot rv">
-          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-bot"/></svg></span><span class="card-n" aria-hidden="true">03</span></div>
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-bot"/></svg></span>
           <h3 data-i18n="s3.t">Telegram-бот как пульт</h3>
-          <p data-i18n="s3.d">Бот с доступом к Google Drive, Sheets и Gmail: команда работает с документами, таблицами и почтой прямо из чата.</p>
-          <ul class="tags"><li>Telegram</li><li>Google Workspace</li></ul>
+          <p data-i18n="s3.d">Бот с доступом к диску, таблицам и почте. Команда работает с ними прямо из чата.</p>
+          <ul class="tags"><li>Google Drive</li><li>Google Sheets</li><li>Gmail</li></ul>
         </li>
         <li class="card spot rv" style="--i:1">
-          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-table"/></svg></span><span class="card-n" aria-hidden="true">04</span></div>
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-table"/></svg></span>
           <h3 data-i18n="s4.t">Учёт и ежедневный анализ</h3>
-          <p data-i18n="s4.d">Каждый день система сама проходит по диску, почте и таблицам, а ИИ-агенты анализируют изменения и ведут учёт.</p>
-          <ul class="tags"><li>n8n</li><li>Google Sheets</li><li>AI agents</li></ul>
+          <p data-i18n="s4.d">Каждый день система сама проходит по диску, почте и таблицам. ИИ-агенты анализируют изменения и ведут учёт.</p>
+          <ul class="tags"><li>n8n</li><li>Google Sheets</li></ul>
         </li>
       </ul>
     </div>
@@ -172,11 +172,11 @@
   <section class="sec" id="case">
     <div class="wrap case-grid">
       <div class="case-intro">
-        <p class="eyebrow rv"><b>03</b><span data-i18n="case.eyebrow">Возможности</span></p>
+        <p class="eyebrow rv"><span data-i18n="case.eyebrow">Возможности</span></p>
         <h2 class="h2 rv" style="--i:1" data-i18n="case.title">Что умеет <em>такая система</em></h2>
-        <p class="case-meta rv" style="--i:2" data-i18n="case.meta">На основе рабочей системы, которую использую каждый день — настраивается под ваши инструменты</p>
+        <p class="case-meta rv" style="--i:2" data-i18n="case.meta">В основе система, которая уже работает в бизнесе. Инструменты подбираются под ваши процессы.</p>
         <dl class="ba rv" style="--i:3">
-          <div><dt data-i18n="case.before.l">Вручную</dt><dd data-i18n="case.before.d">Документы, переписка и учёт разбросаны по почте, диску и таблицам — всё руками.</dd></div>
+          <div><dt data-i18n="case.before.l">Вручную</dt><dd data-i18n="case.before.d">Документы, переписка и учёт разбросаны по почте, диску и таблицам. Всё делается руками.</dd></div>
           <div><dt data-i18n="case.after.l">Можно так</dt><dd data-i18n="case.after.d">Один workflow в n8n сам читает диск и почту, обновляет таблицы, спрашивает подтверждение у человека и даёт доступ ко всему через Telegram-бота.</dd></div>
         </dl>
       </div>
@@ -186,23 +186,23 @@
         <ol>
           <li class="step">
             <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg></span>
-            <div class="card spot rv"><span class="card-n" aria-hidden="true">01</span><h3 data-i18n="c1.t">Запуск по расписанию</h3><p data-i18n="c1.d">Система сама запускается по расписанию или триггеру и проверяет нужные источники — диск, почту, таблицы.</p><ul class="tags"><li>n8n</li><li>Schedule</li><li>Google Drive</li></ul></div>
+            <div class="card spot rv"><h3 data-i18n="c1.t">Запуск по расписанию</h3><p data-i18n="c1.d">Система сама запускается по расписанию или триггеру и проверяет нужные источники: диск, почту, таблицы.</p></div>
           </li>
           <li class="step">
             <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg></span>
-            <div class="card spot rv"><span class="card-n" aria-hidden="true">02</span><h3 data-i18n="c2.t">Чтение и анализ документов</h3><p data-i18n="c2.d">Claude Vision читает PDF и сканы любого типа, а ИИ-агенты разбирают содержимое и достают нужные данные.</p><ul class="tags"><li>Claude Vision</li><li>AI agents</li></ul></div>
+            <div class="card spot rv"><h3 data-i18n="c2.t">Чтение и анализ документов</h3><p data-i18n="c2.d">Claude Vision читает PDF и сканы, а ИИ-агенты разбирают содержимое и достают нужные данные.</p></div>
           </li>
           <li class="step">
             <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-table"/></svg></span>
-            <div class="card spot rv"><span class="card-n" aria-hidden="true">03</span><h3 data-i18n="c3.t">Работа с таблицами</h3><p data-i18n="c3.d">Google Sheets можно читать, обновлять и вести в них учёт — без ручного ввода.</p><ul class="tags"><li>Google Sheets</li></ul></div>
+            <div class="card spot rv"><h3 data-i18n="c3.t">Работа с таблицами</h3><p data-i18n="c3.d">Google Sheets можно читать, проверять и обновлять. Учёт ведётся без ручного ввода.</p></div>
           </li>
           <li class="step">
             <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-mailcheck"/></svg></span>
-            <div class="card spot rv"><span class="card-n" aria-hidden="true">04</span><h3 data-i18n="c4.t">Письма и approve / reject</h3><p data-i18n="c4.d">Система сама пишет и отправляет письма, а решение по важным шагам остаётся за человеком через approve / reject.</p><ul class="tags"><li>Gmail</li><li>approve / reject</li></ul></div>
+            <div class="card spot rv"><h3 data-i18n="c4.t">Письма с подтверждением</h3><p data-i18n="c4.d">Система сама пишет и отправляет письма через Gmail. Важные шаги ждут решения человека: approve или reject.</p></div>
           </li>
           <li class="step">
             <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-bot"/></svg></span>
-            <div class="card spot rv"><span class="card-n" aria-hidden="true">05</span><h3 data-i18n="c5.t">Telegram-бот</h3><p data-i18n="c5.d">Бот с доступом к Google Drive, Sheets и Gmail: можно читать, искать и обновлять данные прямо из чата.</p><ul class="tags"><li>Telegram</li><li>Drive</li><li>Sheets</li><li>Gmail</li></ul></div>
+            <div class="card spot rv"><h3 data-i18n="c5.t">Telegram-бот</h3><p data-i18n="c5.d">Бот с доступом к Google Drive, Sheets и Gmail: можно читать, искать и обновлять данные прямо из чата.</p></div>
           </li>
         </ol>
       </div>
@@ -214,15 +214,15 @@
     <div class="wrap">
       <div class="now-panel rv">
         <div>
-          <p class="eyebrow"><b>04</b><span data-i18n="now.eyebrow">Сейчас</span></p>
+          <p class="eyebrow"><span data-i18n="now.eyebrow">Сейчас</span></p>
           <h2 class="h2" data-i18n="now.title">Строю личную <em>агентную систему</em></h2>
-          <p class="now-p" data-i18n="now.p">Следующий шаг после workflow — система на Claude Code, где работу делят между собой специализированные агенты.</p>
+          <p class="now-p" data-i18n="now.p">Следующий шаг после workflow: система на Claude Code, где работу делят между собой специализированные агенты.</p>
           <p class="badge"><i aria-hidden="true"></i><span data-i18n="now.badge">В разработке</span></p>
         </div>
         <ul class="feat">
-          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-agents"/></svg></span><div><h3 data-i18n="n1.t">Отдельные агенты</h3><p data-i18n="n1.d">Под каждую задачу — свой агент.</p></div></li>
+          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-agents"/></svg></span><div><h3 data-i18n="n1.t">Отдельные агенты</h3><p data-i18n="n1.d">У каждой задачи свой агент.</p></div></li>
           <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-db"/></svg></span><div><h3 data-i18n="n2.t">Постоянная память</h3><p data-i18n="n2.d">Контекст сохраняется между сессиями.</p></div></li>
-          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-zap"/></svg></span><div><h3 data-i18n="n3.t">Реальная автоматизация</h3><p data-i18n="n3.d">То, что работает каждый день, а не демо для видео.</p></div></li>
+          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-zap"/></svg></span><div><h3 data-i18n="n3.t">Рабочая автоматизация</h3><p data-i18n="n3.d">Строю то, чем буду пользоваться сам каждый день.</p></div></li>
         </ul>
       </div>
     </div>
@@ -231,9 +231,9 @@
   <!-- ───── Контакты ───── -->
   <section class="sec contact" id="contact">
     <div class="wrap">
-      <p class="eyebrow rv"><b>05</b><span data-i18n="contact.eyebrow">Контакты</span></p>
+      <p class="eyebrow rv"><span data-i18n="contact.eyebrow">Контакты</span></p>
       <h2 class="h2 rv" style="--i:1" data-i18n="contact.title">Есть рутина, которую пора <em>автоматизировать?</em></h2>
-      <p class="contact-sub rv" style="--i:2" data-i18n="contact.sub">Напишите, что сейчас делается вручную, — разберём, что из этого может делать система.</p>
+      <p class="contact-sub rv" style="--i:2" data-i18n="contact.sub">Напишите, что сейчас делается вручную. Разберём, что из этого может взять на себя система.</p>
       <!-- Ники и почта подставляются из CONTACTS в начале main.js -->
       <ul class="contacts">
         <li class="rv"><a class="ccard ccard-main spot" href="#contact" data-contact="telegram">
