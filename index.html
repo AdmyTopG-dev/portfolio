@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.title">Mykhailo Kuzmin — автоматизация для бизнеса на n8n + Claude API</title>
+  <meta name="description" data-i18n="meta.desc" data-i18n-attr="content" content="Строю автоматизацию для бизнеса: разбор документов через Claude Vision, письма с approve/reject, Telegram-боты с доступом к Google Drive, Sheets и Gmail.">
+  <meta name="theme-color" content="#020504">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mykhailo Kuzmin — автоматизация для бизнеса">
+  <meta property="og:description" content="n8n + Claude API: разбор документов, переписка, учёт — в системе из рабочих workflow.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23020504'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' fill='none' stroke='%233dff8b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <!-- .js прячет блоки до анимации появления; если main.js не запустился — через 3 с показываем всё как есть -->
+  <script>document.documentElement.classList.add('js');setTimeout(function(){window.__ok||document.documentElement.classList.remove('js')},3000)</script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="a11y.skip">К содержанию</a>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+<div class="cur cur-ring" aria-hidden="true"></div>
+<div class="cur cur-dot" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-mailcheck" viewBox="0 0 24 24"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/><path d="m16 19 2 2 4-4"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M12 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+    <symbol id="i-agents" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+  </defs>
+</svg>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#top" aria-label="Mykhailo Kuzmin">
+      <span class="logo-mark" aria-hidden="true">MK</span>
+      <span class="logo-name">Mykhailo Kuzmin</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about" data-i18n="nav.about">Обо мне</a>
+      <a href="#services" data-i18n="nav.services">Услуги</a>
+      <a href="#case" data-i18n="nav.case">Возможности</a>
+      <a href="#now" data-i18n="nav.now">Сейчас</a>
+      <a href="#contact" data-i18n="nav.contact">Контакты</a>
+    </nav>
+    <div class="hdr-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="ru" lang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="pl" lang="pl" aria-pressed="false">PL</button>
+      </div>
+      <a class="btn btn-sm" href="#contact" data-contact="telegram" data-i18n="nav.cta">Написать</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ───── Первый экран ───── -->
+  <section class="hero" id="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="chip rv"><i aria-hidden="true"></i><span data-i18n="hero.status">Открыт к проектам · Польша, удалённо</span></p>
+        <h1 class="h1" data-i18n="hero.title">Автоматизация, которая <em>реально работает</em></h1>
+        <p class="hero-sub rv" style="--i:3" data-i18n="hero.sub">Я Михаил. Строю для бизнеса системы на n8n + Claude API, которые забирают ручную рутину — разбор документов, переписку, учёт. Не демо для видео, а workflow, которые каждый день делают реальную работу.</p>
+        <div class="hero-cta rv" style="--i:4">
+          <a class="btn magnetic" href="#contact" data-contact="telegram"><span data-i18n="hero.cta1">Обсудить задачу</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost magnetic" href="#case"><span data-i18n="hero.cta2">Как это устроено</span><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Иллюстрация: «живой» прогон workflow. Декоративная, содержание продублировано в кейсе -->
+      <div class="run-wrap rv" style="--i:5" aria-hidden="true">
+        <div class="run">
+          <div class="run-bar">
+            <span class="run-dots"><i></i><i></i><i></i></span>
+            <span>workflow / daily-run</span>
+            <span class="run-live"><i></i>live</span>
+          </div>
+          <ol class="run-steps">
+            <li><span class="run-ic"><svg class="ic"><use href="#i-clock"/></svg></span><span class="run-tx"><b>Schedule</b><small>every day</small></span><i class="run-st"></i></li>
+            <li><span class="run-ic"><svg class="ic"><use href="#i-folder"/></svg></span><span class="run-tx"><b>Google Drive</b><small>scan documents</small></span><i class="run-st"></i></li>
+            <li><span class="run-ic"><svg class="ic"><use href="#i-scan"/></svg></span><span class="run-tx"><b>Claude Vision</b><small>PDF → data</small></span><i class="run-st"></i></li>
+            <li><span class="run-ic"><svg class="ic"><use href="#i-table"/></svg></span><span class="run-tx"><b>Google Sheets</b><small>update records</small></span><i class="run-st"></i></li>
+            <li><span class="run-ic"><svg class="ic"><use href="#i-mailcheck"/></svg></span><span class="run-tx"><b>Gmail</b><small>approve / reject</small></span><i class="run-st"></i></li>
+            <li><span class="run-ic"><svg class="ic"><use href="#i-bot"/></svg></span><span class="run-tx"><b>Telegram</b><small>bot online</small></span><i class="run-st"></i></li>
+          </ol>
+          <div class="run-foot"><span>$ n8n execute --id daily-run</span><i class="caret"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── Стек ───── -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <div class="group"><span>n8n</span><span>Claude API</span><span>Claude Vision</span><span>Claude Code</span><span>Telegram Bot API</span><span>Google Drive</span><span>Google Sheets</span><span>Gmail</span></div>
+      <div class="group"><span>n8n</span><span>Claude API</span><span>Claude Vision</span><span>Claude Code</span><span>Telegram Bot API</span><span>Google Drive</span><span>Google Sheets</span><span>Gmail</span></div>
+    </div>
+  </div>
+
+  <!-- ───── Обо мне ───── -->
+  <section class="sec" id="about">
+    <div class="wrap">
+      <p class="eyebrow rv"><b>01</b><span data-i18n="about.eyebrow">Обо мне</span></p>
+      <h2 class="h2 rv" style="--i:1" data-i18n="about.title">Технологии должны снимать рутину <em>с реальных людей</em></h2>
+      <div class="about-grid">
+        <div class="about-text rv">
+          <p data-i18n="about.p1">Мне интересны автоматизация и агентные системы — не абстрактно, а на конкретном бизнесе, который видишь каждый день. На связке n8n + Claude API я превратил ручную работу — разбор документов клиентов, переписку, ведение учёта — в систему из рабочих workflow.</p>
+          <p data-i18n="about.p2">Сейчас двигаюсь дальше — строю личную агентную систему на Claude Code: отдельные агенты под разные задачи и постоянная память между сессиями.</p>
+        </div>
+        <ul class="values">
+          <li class="rv" style="--i:1"><span class="v-n" aria-hidden="true">/01</span><div><h3 data-i18n="about.v1.t">Работает, а не демо</h3><p data-i18n="about.v1.d">Система живёт в ежедневной работе бизнеса, а не в минутном ролике.</p></div></li>
+          <li class="rv" style="--i:2"><span class="v-n" aria-hidden="true">/02</span><div><h3 data-i18n="about.v2.t">Решение за человеком</h3><p data-i18n="about.v2.d">Важные шаги проходят через approve / reject: ИИ готовит, человек подтверждает.</p></div></li>
+          <li class="rv" style="--i:3"><span class="v-n" aria-hidden="true">/03</span><div><h3 data-i18n="about.v3.t">На конкретном бизнесе</h3><p data-i18n="about.v3.d">Автоматизирую не абстрактные «процессы», а работу, которую люди делают каждый день.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── Услуги ───── -->
+  <section class="sec" id="services">
+    <div class="wrap">
+      <p class="eyebrow rv"><b>02</b><span data-i18n="services.eyebrow">Что я делаю</span></p>
+      <h2 class="h2 rv" style="--i:1" data-i18n="services.title">Что можно снять <em>с вашей команды</em></h2>
+      <ul class="cards">
+        <li class="card spot rv">
+          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><span class="card-n" aria-hidden="true">01</span></div>
+          <h3 data-i18n="s1.t">Разбор документов</h3>
+          <p data-i18n="s1.d">PDF и сканы читает Claude Vision: достаёт данные и раскладывает их по местам — без ручного перепечатывания.</p>
+          <ul class="tags"><li>Claude Vision</li><li>PDF</li></ul>
+        </li>
+        <li class="card spot rv" style="--i:1">
+          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-mailcheck"/></svg></span><span class="card-n" aria-hidden="true">02</span></div>
+          <h3 data-i18n="s2.t">Переписка под контролем</h3>
+          <p data-i18n="s2.d">Автоматические письма с подтверждением изменений. Перед важным шагом — approve или reject от человека.</p>
+          <ul class="tags"><li>Gmail</li><li>approve / reject</li></ul>
+        </li>
+        <li class="card spot rv">
+          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-bot"/></svg></span><span class="card-n" aria-hidden="true">03</span></div>
+          <h3 data-i18n="s3.t">Telegram-бот как пульт</h3>
+          <p data-i18n="s3.d">Бот с доступом к Google Drive, Sheets и Gmail: команда работает с документами, таблицами и почтой прямо из чата.</p>
+          <ul class="tags"><li>Telegram</li><li>Google Workspace</li></ul>
+        </li>
+        <li class="card spot rv" style="--i:1">
+          <div class="card-top"><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-table"/></svg></span><span class="card-n" aria-hidden="true">04</span></div>
+          <h3 data-i18n="s4.t">Учёт и ежедневный анализ</h3>
+          <p data-i18n="s4.d">Каждый день система сама проходит по диску, почте и таблицам, а ИИ-агенты анализируют изменения и ведут учёт.</p>
+          <ul class="tags"><li>n8n</li><li>Google Sheets</li><li>AI agents</li></ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ───── Кейс ───── -->
+  <section class="sec" id="case">
+    <div class="wrap case-grid">
+      <div class="case-intro">
+        <p class="eyebrow rv"><b>03</b><span data-i18n="case.eyebrow">Возможности</span></p>
+        <h2 class="h2 rv" style="--i:1" data-i18n="case.title">Что умеет <em>такая система</em></h2>
+        <p class="case-meta rv" style="--i:2" data-i18n="case.meta">На основе рабочей системы, которую использую каждый день — настраивается под ваши инструменты</p>
+        <dl class="ba rv" style="--i:3">
+          <div><dt data-i18n="case.before.l">Вручную</dt><dd data-i18n="case.before.d">Документы, переписка и учёт разбросаны по почте, диску и таблицам — всё руками.</dd></div>
+          <div><dt data-i18n="case.after.l">Можно так</dt><dd data-i18n="case.after.d">Один workflow в n8n сам читает диск и почту, обновляет таблицы, спрашивает подтверждение у человека и даёт доступ ко всему через Telegram-бота.</dd></div>
+        </dl>
+      </div>
+
+      <div class="flow">
+        <span class="flow-line" aria-hidden="true"><i class="flow-fill"></i></span>
+        <ol>
+          <li class="step">
+            <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <div class="card spot rv"><span class="card-n" aria-hidden="true">01</span><h3 data-i18n="c1.t">Запуск по расписанию</h3><p data-i18n="c1.d">Система сама запускается по расписанию или триггеру и проверяет нужные источники — диск, почту, таблицы.</p><ul class="tags"><li>n8n</li><li>Schedule</li><li>Google Drive</li></ul></div>
+          </li>
+          <li class="step">
+            <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg></span>
+            <div class="card spot rv"><span class="card-n" aria-hidden="true">02</span><h3 data-i18n="c2.t">Чтение и анализ документов</h3><p data-i18n="c2.d">Claude Vision читает PDF и сканы любого типа, а ИИ-агенты разбирают содержимое и достают нужные данные.</p><ul class="tags"><li>Claude Vision</li><li>AI agents</li></ul></div>
+          </li>
+          <li class="step">
+            <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-table"/></svg></span>
+            <div class="card spot rv"><span class="card-n" aria-hidden="true">03</span><h3 data-i18n="c3.t">Работа с таблицами</h3><p data-i18n="c3.d">Google Sheets можно читать, обновлять и вести в них учёт — без ручного ввода.</p><ul class="tags"><li>Google Sheets</li></ul></div>
+          </li>
+          <li class="step">
+            <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-mailcheck"/></svg></span>
+            <div class="card spot rv"><span class="card-n" aria-hidden="true">04</span><h3 data-i18n="c4.t">Письма и approve / reject</h3><p data-i18n="c4.d">Система сама пишет и отправляет письма, а решение по важным шагам остаётся за человеком через approve / reject.</p><ul class="tags"><li>Gmail</li><li>approve / reject</li></ul></div>
+          </li>
+          <li class="step">
+            <span class="step-node"><svg class="ic" aria-hidden="true"><use href="#i-bot"/></svg></span>
+            <div class="card spot rv"><span class="card-n" aria-hidden="true">05</span><h3 data-i18n="c5.t">Telegram-бот</h3><p data-i18n="c5.d">Бот с доступом к Google Drive, Sheets и Gmail: можно читать, искать и обновлять данные прямо из чата.</p><ul class="tags"><li>Telegram</li><li>Drive</li><li>Sheets</li><li>Gmail</li></ul></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── Сейчас ───── -->
+  <section class="sec" id="now">
+    <div class="wrap">
+      <div class="now-panel rv">
+        <div>
+          <p class="eyebrow"><b>04</b><span data-i18n="now.eyebrow">Сейчас</span></p>
+          <h2 class="h2" data-i18n="now.title">Строю личную <em>агентную систему</em></h2>
+          <p class="now-p" data-i18n="now.p">Следующий шаг после workflow — система на Claude Code, где работу делят между собой специализированные агенты.</p>
+          <p class="badge"><i aria-hidden="true"></i><span data-i18n="now.badge">В разработке</span></p>
+        </div>
+        <ul class="feat">
+          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-agents"/></svg></span><div><h3 data-i18n="n1.t">Отдельные агенты</h3><p data-i18n="n1.d">Под каждую задачу — свой агент.</p></div></li>
+          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-db"/></svg></span><div><h3 data-i18n="n2.t">Постоянная память</h3><p data-i18n="n2.d">Контекст сохраняется между сессиями.</p></div></li>
+          <li><span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-zap"/></svg></span><div><h3 data-i18n="n3.t">Реальная автоматизация</h3><p data-i18n="n3.d">То, что работает каждый день, а не демо для видео.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── Контакты ───── -->
+  <section class="sec contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow rv"><b>05</b><span data-i18n="contact.eyebrow">Контакты</span></p>
+      <h2 class="h2 rv" style="--i:1" data-i18n="contact.title">Есть рутина, которую пора <em>автоматизировать?</em></h2>
+      <p class="contact-sub rv" style="--i:2" data-i18n="contact.sub">Напишите, что сейчас делается вручную, — разберём, что из этого может делать система.</p>
+      <!-- Ники и почта подставляются из CONTACTS в начале main.js -->
+      <ul class="contacts">
+        <li class="rv"><a class="ccard ccard-main spot" href="#contact" data-contact="telegram">
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></span><svg class="ic c-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span class="c-name">Telegram</span><span class="c-handle" data-handle>@username</span><span class="c-hint" data-i18n="contact.tg.hint">Быстрее всего отвечаю здесь</span>
+        </a></li>
+        <li class="rv" style="--i:1"><a class="ccard spot" href="#contact" data-contact="email">
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span><svg class="ic c-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span class="c-name">Email</span><span class="c-handle" data-handle>name@example.com</span><span class="c-hint" data-i18n="contact.mail.hint">Для подробных запросов</span>
+        </a></li>
+        <li class="rv" style="--i:2"><a class="ccard spot" href="#contact" data-contact="instagram">
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-insta"/></svg></span><svg class="ic c-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span class="c-name">Instagram</span><span class="c-handle" data-handle>@username</span><span class="c-hint" data-i18n="contact.ig.hint">Личный профиль</span>
+        </a></li>
+        <li class="rv" style="--i:3"><a class="ccard spot" href="#contact" data-contact="github">
+          <span class="ibox"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg></span><svg class="ic c-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span class="c-name">GitHub</span><span class="c-handle" data-handle>@username</span><span class="c-hint" data-i18n="contact.gh.hint">Код и проекты</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <span>© <span id="y">2026</span> Mykhailo Kuzmin</span>
+    <a href="#top"><span data-i18n="footer.top">Наверх</span> ↑</a>
+  </div>
+</footer>
+
+<script src="i18n.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>
